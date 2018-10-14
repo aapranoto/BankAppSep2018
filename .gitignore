@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/BankAppSep2018/bin/Debug/netcoreapp2.1
+/BankAppSep2018/obj
