@@ -4,35 +4,35 @@ using System.Text;
 
 namespace BankAppSep2018
 {
-    enum TypeOfAccount
+    public enum TypeOfAccount
     {
         Savings,
         Checking,
         CD,
         Loan
     }
-    class Account
+    public class Account
     {
         
-        private static int lastAccountNumber = 0;
-
+        
         #region Properties
         /// <summary>
-        /// 
+        /// Account number for account
         /// </summary>
-        public int AccountNumber { get; }
+        public int AccountNumber { get; set; }
         public TypeOfAccount AccountType { get; set; }
         public decimal Balance { get; private set; }
         public string EmailAddress { get; set; }
         public DateTime CreatedDate { get; }
+
+        public virtual ICollection<Transaction> Transactions { get; set; }
         #endregion
-        
+
         #region Constructor
 
         public Account()
         {
-            AccountNumber = ++lastAccountNumber;
-            CreatedDate = DateTime.Now;
+           CreatedDate = DateTime.Now;
         }
 
         #endregion
@@ -48,8 +48,12 @@ namespace BankAppSep2018
             Balance += amount;
         }
 
-        public void Withdrawal(decimal amount)
+        public void Withdraw(decimal amount)
         {
+            if (amount > Balance)
+            {
+                throw new NSFException("Not sufficient fund!");
+            }
             Balance -= amount;
         }
         #endregion
